@@ -9,17 +9,28 @@ Author: **Brahim O.**
 
 ```
 college-ahuntsic-scripts/
+├── .gitignore
+├── README.md
 ├── bash/
-│   └── usermanager.sh      # Linux user & group management tool
+│   ├── usermanager.sh              # Linux user & group management tool
+│   ├── monitor-filesystem.sh       # Disk usage monitoring & email alerts (Bash)
+│   ├── .env.example                # Credentials template (copy to .env)
+│   └── images/
+│       ├── runas-root.png
+│       ├── usermanager-menu.png
+│       ├── usermanager-run1.png
+│       └── usermanager-run2.png
 ├── python/
-│   └── ...                 # Python script (coming soon)
+│   ├── monitor-filesystem.py       # Disk usage monitoring & email alerts (Python)
+│   ├── .env.example                # Credentials template (copy to .env)
+│   └── requirements.txt
 └── sql/
-    └── ...                 # SQL script (coming soon)
+    └── ...                         # SQL script (coming soon)
 ```
 
 ---
 
-## Bash — User & Group Manager (`usermanager.sh`)
+## Bash Script 1 — User & Group Manager (`usermanager.sh`)
 
 An interactive menu-driven Bash script for managing Linux users and groups.  
 Must be run as **root**.
@@ -62,13 +73,13 @@ Script syntax verified with [ShellCheck](https://www.shellcheck.net/).
 
 ---
 
-## 📸 Screenshots
+## Screenshots — User & Group Manager
 
 ### Root privilege check
 ![Root privilege check](bash/images/runas-root.png)
 
 ### Main menu
-![Main menu](images/bash/usermanager-menu.png)
+![Main menu](bash/images/usermanager-menu.png)
 
 ### Script execution — Example 1
 ![Script execution 1](bash/images/usermanager-run1.png)
@@ -80,9 +91,9 @@ Script syntax verified with [ShellCheck](https://www.shellcheck.net/).
 
 ## Bash Script 2 — Filesystem Monitor (`monitor-filesystem.sh`)
 
-A Bash script that monitors the root (`/`) filesystem disk usage.  
-If usage exceeds a defined threshold, it sends an email alert via SMTP.  
-Also logs all activity to a local log file.
+A Bash script that monitors the root (`/`) filesystem disk usage on AlmaLinux.  
+Sends a **WARNING** email if usage exceeds the threshold, an **INFO** email otherwise.  
+All activity is logged to a local log file.
 
 ### Features
 
@@ -91,25 +102,14 @@ Also logs all activity to a local log file.
 - Sends a **WARNING** email if threshold is exceeded
 - Sends an **INFO** email if usage is below threshold
 - Logs all activity with timestamps and hostname
-- Credentials stored securely in `.env` file — never hardcoded
+- Credentials stored securely in `.env` — never hardcoded
 
 ### Configuration
 
 ```bash
-# Copy the credentials template
 cp .env.example .env
-
-# Edit .env with your SMTP settings
 nano .env
 ```
-
-### Threshold
-
-```bash
-THRESHOLD=10  # Alert if disk usage exceeds 10%
-```
-
-Modify this value directly in the script to adjust the alert level.
 
 ### Usage
 
@@ -128,7 +128,46 @@ sudo ./monitor-filesystem.sh
 
 ---
 
-## Python — (Coming soon)
+## Python — Filesystem Monitor (`monitor-filesystem.py`)
+
+Python version of the filesystem monitor.  
+Same logic as the Bash version — checks disk usage, sends email alert via SMTP.
+
+### Features
+
+- Interactive menu (Check / Quit)
+- Sends **WARNING** email if threshold exceeded
+- Sends **INFO** email if usage is within limits
+- Detailed disk info (Total / Used / Free in GiB)
+- Credentials loaded from `.env` via `python-dotenv`
+- Compatible with **Python 3.9+**
+
+### Installation
+
+```bash
+pip install -r requirements.txt
+```
+
+### Configuration
+
+```bash
+cp .env.example .env
+nano .env
+```
+
+### Usage
+
+```bash
+python3 monitor-filesystem.py
+```
+
+### Security
+
+| File | Purpose |
+|------|---------|
+| `.env` | Your real credentials — **never commit this** |
+| `.env.example` | Template to share safely on GitHub |
+| `.gitignore` | Ensures `.env` and logs are never pushed |
 
 ---
 
@@ -139,5 +178,7 @@ sudo ./monitor-filesystem.sh
 ## Notes
 
 - Developed in **February 2023** as part of a Linux administration course
-- Tested on **Alma / Debian** based systems
-- Color-coded output for improved readability (green / blue / red)
+- Bash scripts tested on **AlmaLinux / RHEL** based systems
+- Python script tested on **Python 3.9.14**
+- Script syntax verified with [ShellCheck](https://www.shellcheck.net/)
+- Credentials always managed via `.env` files — never hardcoded
