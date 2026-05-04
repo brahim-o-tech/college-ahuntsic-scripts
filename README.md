@@ -78,6 +78,56 @@ Script syntax verified with [ShellCheck](https://www.shellcheck.net/).
 
 ---
 
+## Bash Script 2 — Filesystem Monitor (`monitor-filesystem.sh`)
+
+A Bash script that monitors the root (`/`) filesystem disk usage.  
+If usage exceeds a defined threshold, it sends an email alert via SMTP.  
+Also logs all activity to a local log file.
+
+### Features
+
+- Retrieves disk usage with `df`
+- Compares usage against a configurable threshold
+- Sends a **WARNING** email if threshold is exceeded
+- Sends an **INFO** email if usage is below threshold
+- Logs all activity with timestamps and hostname
+- Credentials stored securely in `.env` file — never hardcoded
+
+### Configuration
+
+```bash
+# Copy the credentials template
+cp .env.example .env
+
+# Edit .env with your SMTP settings
+nano .env
+```
+
+### Threshold
+
+```bash
+THRESHOLD=10  # Alert if disk usage exceeds 10%
+```
+
+Modify this value directly in the script to adjust the alert level.
+
+### Usage
+
+```bash
+chmod +x monitor-filesystem.sh
+sudo ./monitor-filesystem.sh
+```
+
+### Security
+
+| File | Purpose |
+|------|---------|
+| `.env` | Your real credentials — **never commit this** |
+| `.env.example` | Template to share safely on GitHub |
+| `.gitignore` | Ensures `.env` and logs are never pushed |
+
+---
+
 ## Python — (Coming soon)
 
 ---
@@ -89,5 +139,5 @@ Script syntax verified with [ShellCheck](https://www.shellcheck.net/).
 ## Notes
 
 - Developed in **February 2023** as part of a Linux administration course
-- Tested on **Ubuntu / Debian** based systems
+- Tested on **Alma / Debian** based systems
 - Color-coded output for improved readability (green / blue / red)
