@@ -23,7 +23,10 @@ college-ahuntsic-scripts/
 ├── python/
 │   ├── monitor-filesystem.py       # Disk usage monitoring & email alerts (Python)
 │   ├── .env.example                # Credentials template (copy to .env)
-│   └── requirements.txt
+│   ├── requirements.txt
+│   └── images/
+│       ├── monitor-filesystem-py1.png
+│       └── monitor-filesystem-py2.png
 └── sql/
     └── ...                         # SQL script (coming soon)
 ```
@@ -126,6 +129,7 @@ sudo ./monitor-filesystem.sh
 | `.env.example` | Template to share safely on GitHub |
 | `.gitignore` | Ensures `.env` and logs are never pushed |
 
+
 ---
 
 ## Python — Filesystem Monitor (`monitor-filesystem.py`)
@@ -168,6 +172,16 @@ python3 monitor-filesystem.py
 | `.env` | Your real credentials — **never commit this** |
 | `.env.example` | Template to share safely on GitHub |
 | `.gitignore` | Ensures `.env` and logs are never pushed |
+
+---
+
+## 📸 Screenshots — Python Filesystem Monitor
+
+### Script execution
+![Script execution](python/images/monitor-filesystem-py1.png)
+
+### HMailServer — Email alert received
+![HMailServer alert](python/images/monitor-filesystem-py2.png)
 
 ---
 
