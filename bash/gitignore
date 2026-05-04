@@ -1,0 +1,6 @@
+# Credentials — NEVER push this to GitHub
+.env
+
+# Log files
+*.txt
+*.log
