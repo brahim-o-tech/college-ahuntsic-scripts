@@ -65,16 +65,16 @@ Script syntax verified with [ShellCheck](https://www.shellcheck.net/).
 ## 📸 Screenshots
 
 ### Root privilege check
-![Root privilege check](images/runas-root.png)
+![Root privilege check](bash/images/runas-root.png)
 
 ### Main menu
-![Main menu](images/usermanager-menu.png)
+![Main menu](images/bash/usermanager-menu.png)
 
 ### Script execution — Example 1
-![Script execution 1](images/usermanager-run1.png)
+![Script execution 1](bash/images/usermanager-run1.png)
 
 ### Script execution — Example 2
-![Script execution 2](images/usermanager-run2.png)
+![Script execution 2](bash/images/usermanager-run2.png)
 
 ---
 
